@@ -22,7 +22,7 @@ router.get('/talker/:id', async (req, res) => {
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
 // valida email
-  const validEmailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const validEmailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // ref: https://stackoverflow.com/questions/2507030/email-validation-using-jquery
   if (!email) return res.status(400).json({ message: 'O campo "email" é obrigatório' });
   if (!email.match(validEmailFormat)) {
     return res.status(400).json({ message: 'O "email" deve ter o formato "email@email.com"' });
