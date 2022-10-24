@@ -103,6 +103,12 @@ const editForId = async (id, name, age, talk) => {
   return result;
 };
 // ^^^
+const deletTalkerForId = async (id) => {
+  const talkerJson = await readTalker();
+  const filterId = talkerJson.filter((talker) => Number(talker.id) !== Number(id));
+  await writeTalkers(filterId);
+  return filterId;
+};
 module.exports = {
   readTalker,
   talkerId,
@@ -120,5 +126,8 @@ module.exports = {
   // 6º vvvv
   editForId,
   //   ^^^^
+  // 7º vvvv
+  deletTalkerForId,
+  // ^^^^
   // validateEmail,
 };

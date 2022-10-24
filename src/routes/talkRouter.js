@@ -64,4 +64,13 @@ router.put('/talker/:id',
   const result = await readTalkerData.editForId(id, name, age, talk);
   return res.status(200).json(result);
 });
+
+router.delete('/talker/:id', 
+  readTalkerData.tokenAuthorization,
+  async (req, res) => {
+    const { id } = req.params;
+    await readTalkerData.deletTalkerForId(id);
+    res.status(204).json();
+  });
+
 module.exports = router;
