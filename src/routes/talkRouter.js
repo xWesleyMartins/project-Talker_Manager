@@ -8,6 +8,20 @@ router.get('/talker', async (_req, res) => {
   return res.status(200).json(result);
 });
 
+router.get('/talker/search', 
+  readTalkerData.tokenAuthorization,
+  async (req, res) => {
+    const query = req.query.q;
+    console.log(query);
+    const talkerJson = await readTalkerData.readTalker();
+      if (!query) {
+        return res.status(200).json(talkerJson);
+      }
+    const filterQuery = talkerJson.filter((queryParam) => queryParam.name.includes(query));
+      console.log(filterQuery);
+    return res.status(200).json(filterQuery);
+  });
+
 router.get('/talker/:id', async (req, res) => {
   const { id } = req.params;
   const result = await readTalkerData.talkerId(Number(id));

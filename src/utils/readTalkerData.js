@@ -2,12 +2,10 @@ const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
 const { join } = require('path');
-// const talkerJson = require('../talker.json');
 
 // midleware
 async function readTalker() {
   try {
-    // const data = await fs.readFile(path.resolve(__dirname, '../talker.json'));
     const data = path.resolve(__dirname, '../talker.json');
     const fsData = await fs.readFile(data);
     const result = await JSON.parse(fsData);
@@ -103,17 +101,18 @@ const editForId = async (id, name, age, talk) => {
   return result;
 };
 // ^^^
+// 7º vvv
 const deletTalkerForId = async (id) => {
   const talkerJson = await readTalker();
   const filterId = talkerJson.filter((talker) => Number(talker.id) !== Number(id));
   await writeTalkers(filterId);
   return filterId;
 };
+
 module.exports = {
   readTalker,
   talkerId,
   tokenLogin,
-  // 5º vvvv
   tokenAuthorization, 
   validPlaceName,
   validPlaceAge, 
@@ -122,12 +121,6 @@ module.exports = {
   validPlaceRate,
   writeTalkers,
   addNewTalkerData,
-  // ^^^^^
-  // 6º vvvv
   editForId,
-  //   ^^^^
-  // 7º vvvv
   deletTalkerForId,
-  // ^^^^
-  // validateEmail,
 };
